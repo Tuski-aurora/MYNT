@@ -74,6 +74,7 @@
     <property name="title">
      <string>帮助(&amp;H)</string>
     </property>
+    <addaction name="actionAbout"/>
    </widget>
    <addaction name="menu_F"/>
    <addaction name="menu"/>
