@@ -115,6 +115,10 @@
    <addaction name="actionStatusBar"/>
   </widget>
   <action name="actionNew">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/new.svg</normaloff>:/image/new.svg</iconset>
+   </property>
    <property name="text">
     <string>新建(&amp;N)</string>
    </property>
@@ -126,6 +130,10 @@
    </property>
   </action>
   <action name="action_O">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/open.svg</normaloff>:/image/open.svg</iconset>
+   </property>
    <property name="text">
     <string>打开(&amp;O)</string>
    </property>
@@ -137,6 +145,10 @@
    </property>
   </action>
   <action name="actionSave">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/save.svg</normaloff>:/image/save.svg</iconset>
+   </property>
    <property name="text">
     <string>保存(&amp;S)</string>
    </property>
@@ -145,16 +157,28 @@
    </property>
   </action>
   <action name="actionsSaveAs">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/saveas.svg</normaloff>:/image/saveas.svg</iconset>
+   </property>
    <property name="text">
     <string>另存为(&amp;A)</string>
    </property>
   </action>
   <action name="actionExit">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/exit.svg</normaloff>:/image/exit.svg</iconset>
+   </property>
    <property name="text">
     <string>退出</string>
    </property>
   </action>
   <action name="actionUndo">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/undo.svg</normaloff>:/image/undo.svg</iconset>
+   </property>
    <property name="text">
     <string>撤销(&amp;U)</string>
    </property>
@@ -163,6 +187,10 @@
    </property>
   </action>
   <action name="actionCut">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/cut.svg</normaloff>:/image/cut.svg</iconset>
+   </property>
    <property name="text">
     <string>剪切(&amp;T)</string>
    </property>
@@ -171,6 +199,10 @@
    </property>
   </action>
   <action name="actionCopy">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/copy.svg</normaloff>:/image/copy.svg</iconset>
+   </property>
    <property name="text">
     <string>复制(&amp;C)</string>
    </property>
@@ -179,6 +211,10 @@
    </property>
   </action>
   <action name="actionPaste">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/paste.svg</normaloff>:/image/paste.svg</iconset>
+   </property>
    <property name="text">
     <string>粘贴(&amp;P)</string>
    </property>
@@ -187,6 +223,10 @@
    </property>
   </action>
   <action name="actionFind">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/find.svg</normaloff>:/image/find.svg</iconset>
+   </property>
    <property name="text">
     <string>查找(&amp;F)</string>
    </property>
@@ -195,6 +235,10 @@
    </property>
   </action>
   <action name="actionReplace">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/replace.svg</normaloff>:/image/replace.svg</iconset>
+   </property>
    <property name="text">
     <string>替换(&amp;R)</string>
    </property>
@@ -203,21 +247,37 @@
    </property>
   </action>
   <action name="actionFont">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/font.svg</normaloff>:/image/font.svg</iconset>
+   </property>
    <property name="text">
     <string>字体</string>
    </property>
   </action>
   <action name="actionAutoWrap">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/auto_wrap.svg</normaloff>:/image/auto_wrap.svg</iconset>
+   </property>
    <property name="text">
     <string>自动换行</string>
    </property>
   </action>
   <action name="actionToolbar">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/toolbar.svg</normaloff>:/image/toolbar.svg</iconset>
+   </property>
    <property name="text">
     <string>工具栏(&amp;T)</string>
    </property>
   </action>
   <action name="actionRedo">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/redo.svg</normaloff>:/image/redo.svg</iconset>
+   </property>
    <property name="text">
     <string>恢复(&amp;)</string>
    </property>
@@ -226,6 +286,10 @@
    </property>
   </action>
   <action name="actionSelectAll">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/select_all.svg</normaloff>:/image/select_all.svg</iconset>
+   </property>
    <property name="text">
     <string>全选(&amp;A)</string>
    </property>
@@ -234,16 +298,28 @@
    </property>
   </action>
   <action name="actionStatusBar">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/statusbar.svg</normaloff>:/image/statusbar.svg</iconset>
+   </property>
    <property name="text">
     <string>状态栏(&amp;S)</string>
    </property>
   </action>
   <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/about.svg</normaloff>:/image/about.svg</iconset>
+   </property>
    <property name="text">
     <string>关于(&amp;A)</string>
    </property>
   </action>
   <action name="actionShowLine">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/showline.svg</normaloff>:/image/showline.svg</iconset>
+   </property>
    <property name="text">
     <string>显示行号(&amp;L)</string>
    </property>
@@ -252,21 +328,35 @@
    </property>
   </action>
   <action name="actionFontColor">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/fontcolor.svg</normaloff>:/image/fontcolor.svg</iconset>
+   </property>
    <property name="text">
     <string>字体颜色</string>
    </property>
   </action>
   <action name="actionFontBackColor">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/font_bg.svg</normaloff>:/image/font_bg.svg</iconset>
+   </property>
    <property name="text">
     <string>字体背景色</string>
    </property>
   </action>
   <action name="actionEditBackColor">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/image/editor_bg.svg</normaloff>:/image/editor_bg.svg</iconset>
+   </property>
    <property name="text">
     <string>编辑器背景色</string>
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
  <connections/>
 </ui>

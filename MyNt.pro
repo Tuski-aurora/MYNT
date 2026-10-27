@@ -12,19 +12,25 @@ SOURCES += \
     aboutdialog.cpp \
     finddialog.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    replacedialog.cpp
 
 HEADERS += \
     aboutdialog.h \
     finddialog.h \
-    mainwindow.h
+    mainwindow.h \
+    replacedialog.h
 
 FORMS += \
     aboutdialog.ui \
     finddialog.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    replacedialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    res.qrc
