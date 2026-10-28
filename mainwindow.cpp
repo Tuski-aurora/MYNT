@@ -15,8 +15,19 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+
+
+    ui->actionCopy->setEnabled(false);
+    ui->actionCut->setEnabled(false);
+    ui->actionRedo->setEnabled(false);
+    ui->actionUndo->setEnabled(false);
+    ui->actionPaste->setEnabled(false);
+
     isModified = false;
     currentFilePath = "";
+
+    on_actionNew_triggered();
 
     statusLabel.setMaximumWidth(500);
     statusLabel.setText("length: " + QString::number(0) + "    lines: " + QString::number(1));
@@ -37,7 +48,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
+//对话框
 void MainWindow::on_actionAbout_triggered()
 {
     AboutDialog dio;
@@ -59,16 +70,7 @@ void MainWindow::on_actionReplace_triggered()
 }
 
 
-void MainWindow::on_plainTextEdit_textChanged()
-{
-    if(!isModified)
-        {
-            isModified = true;
-            setWindowTitleByPath();
-        }
-}
-
-
+//槽函数
 void MainWindow::on_actionNew_triggered()
 {
     // 第一步先判断是否需要保存
@@ -169,15 +171,15 @@ bool MainWindow::maybeSave()
         QMessageBox::StandardButton ret = QMessageBox::question(this,
                                                                  tr("提示"),
                                                                  tr("文件已经修改，是否保存更改？"),
-                                                                 QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-        if(ret == QMessageBox::Save)
+                                                                 QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
+        if(ret == QMessageBox::Yes)
         {
             // 执行保存
             on_actionSave_triggered();
             // 保存之后再判断：如果保存完还是修改状态（比如用户另存弹窗点取消），不能放行
             return !isModified;
         }
-        else if(ret == QMessageBox::Discard)
+        else if(ret == QMessageBox::No)
         {
             // 不保存，直接放行
             return true;
@@ -207,5 +209,67 @@ void MainWindow::setWindowTitleByPath()
             title = "* " + title;
         }
         this->setWindowTitle(title);
+}
+
+
+void MainWindow::on_actionUndo_triggered()
+{
+    ui->textEdit->undo();
+}
+
+
+void MainWindow::on_actionCut_triggered()
+{
+    ui->textEdit->cut();
+    ui->actionPaste->setEnabled(true);
+}
+
+
+void MainWindow::on_actionCopy_triggered()
+{
+    ui->textEdit->copy();
+    ui->actionPaste->setEnabled(true);
+}
+
+
+void MainWindow::on_actionPaste_triggered()
+{
+    ui->textEdit->paste();
+}
+
+
+void MainWindow::on_actionRedo_triggered()
+{
+    ui->textEdit->redo();
+}
+
+
+void MainWindow::on_textEdit_copyAvailable(bool b)
+{
+    ui->actionCopy->setEnabled(b);
+    ui->actionCut->setEnabled(b);
+
+}
+
+
+void MainWindow::on_textEdit_redoAvailable(bool b)
+{
+    ui->actionRedo->setEnabled(b);
+}
+
+
+void MainWindow::on_textEdit_undoAvailable(bool b)
+{
+    ui->actionUndo->setEnabled(b);
+}
+
+
+void MainWindow::on_textEdit_textChanged()
+{
+    if(!isModified)
+        {
+            isModified = true;
+            setWindowTitleByPath();
+        }
 }
 
