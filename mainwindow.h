@@ -50,6 +50,16 @@ private slots:
 
     void on_textEdit_textChanged();
 
+    void on_actionFont_triggered();
+
+    void on_actionAutoWrap_triggered();
+
+    void on_actionFontColor_triggered();
+
+    void on_actionEditBackColor_triggered();
+
+    void on_actionFontBackColor_triggered();
+
 private:
     Ui::MainWindow *ui;
 

@@ -9,6 +9,10 @@
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QTextStream>
+#include <QFontDialog>
+#include <QColorDialog>
+#include <QTextCursor>
+#include <QTextCharFormat>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -270,6 +274,70 @@ void MainWindow::on_textEdit_textChanged()
         {
             isModified = true;
             setWindowTitleByPath();
+        }
+}
+
+
+void MainWindow::on_actionFont_triggered()
+{
+    bool ok = false;
+        QFont font = QFontDialog::getFont(&ok, this);
+        if (ok)
+        {
+            ui->textEdit->setFont(font);
+        }
+}
+
+
+void MainWindow::on_actionAutoWrap_triggered()
+{
+    QPlainTextEdit::LineWrapMode mode = ui->textEdit->lineWrapMode();
+        if (mode == QPlainTextEdit::NoWrap)
+        {
+            ui->textEdit->setLineWrapMode(QPlainTextEdit::WidgetWidth);
+            ui->actionAutoWrap->setChecked(true);
+        }
+        else
+        {
+            ui->textEdit->setLineWrapMode(QPlainTextEdit::NoWrap);
+            ui->actionAutoWrap->setChecked(false);
+        }
+}
+
+
+void MainWindow::on_actionFontColor_triggered()
+{
+    QColor color = QColorDialog::getColor(Qt::black, this, "选择字体颜色");
+        if (color.isValid())
+        {
+            ui->textEdit->setStyleSheet(QString("QPlainTextEdit {color: %1;}").arg(color.name()));
+        }
+}
+
+
+void MainWindow::on_actionEditBackColor_triggered()
+{
+    QColor color = QColorDialog::getColor(Qt::white, this, "选择背景颜色");
+        if (color.isValid())
+        {
+            ui->textEdit->setStyleSheet(QString("QPlainTextEdit {background-color: %1;}").arg(color.name()));
+        }
+}
+
+
+void MainWindow::on_actionFontBackColor_triggered()
+{
+    QColor color = QColorDialog::getColor(Qt::yellow, this, "选择文字背景色");
+        if (!color.isValid())
+            return;
+
+        QTextCursor cursor = ui->textEdit->textCursor();
+        if (cursor.hasSelection())
+        {
+            QTextCharFormat fmt = cursor.charFormat();
+            fmt.setBackground(color);
+            cursor.setCharFormat(fmt);
+            ui->textEdit->setTextCursor(cursor);
         }
 }
 

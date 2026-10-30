@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1346</width>
-    <height>270</height>
+    <width>631</width>
+    <height>418</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,7 +40,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1346</width>
+     <width>631</width>
      <height>23</height>
     </rect>
    </property>
@@ -59,16 +59,37 @@
     <property name="title">
      <string>编辑(&amp;E)</string>
     </property>
+    <addaction name="actionUndo"/>
+    <addaction name="actionRedo"/>
+    <addaction name="actionCut"/>
+    <addaction name="actionCopy"/>
+    <addaction name="actionPaste"/>
+    <addaction name="separator"/>
+    <addaction name="separator"/>
+    <addaction name="actionFind"/>
+    <addaction name="actionReplace"/>
+    <addaction name="separator"/>
+    <addaction name="separator"/>
+    <addaction name="actionSelectAll"/>
    </widget>
    <widget class="QMenu" name="menu_O">
     <property name="title">
      <string>格式(&amp;O)</string>
     </property>
+    <addaction name="actionAutoWrap"/>
+    <addaction name="actionShowLine"/>
+    <addaction name="actionFont"/>
+    <addaction name="actionFontColor"/>
+    <addaction name="separator"/>
+    <addaction name="actionFontBackColor"/>
+    <addaction name="actionEditBackColor"/>
    </widget>
    <widget class="QMenu" name="menu_V">
     <property name="title">
      <string>查看(&amp;V)</string>
     </property>
+    <addaction name="actionToolbar"/>
+    <addaction name="actionStatusBar"/>
    </widget>
    <widget class="QMenu" name="menu_H">
     <property name="title">
@@ -265,6 +286,9 @@
    </property>
   </action>
   <action name="actionToolbar">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="res.qrc">
      <normaloff>:/image/toolbar.svg</normaloff>:/image/toolbar.svg</iconset>
@@ -298,6 +322,9 @@
    </property>
   </action>
   <action name="actionStatusBar">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="res.qrc">
      <normaloff>:/image/statusbar.svg</normaloff>:/image/statusbar.svg</iconset>
