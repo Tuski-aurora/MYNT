@@ -11,8 +11,6 @@
 #include <QTextStream>
 #include <QFontDialog>
 #include <QColorDialog>
-#include <QTextCursor>
-#include <QTextCharFormat>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -32,6 +30,22 @@ MainWindow::MainWindow(QWidget *parent)
     currentFilePath = "";
 
     on_actionNew_triggered();
+
+    QPlainTextEdit::LineWrapMode mode = ui->textEdit->lineWrapMode();
+        if (mode == QPlainTextEdit::NoWrap)
+        {
+            ui->textEdit->setLineWrapMode(QPlainTextEdit::WidgetWidth);
+            ui->actionAutoWrap->setChecked(true);
+        }
+        else
+        {
+            ui->textEdit->setLineWrapMode(QPlainTextEdit::NoWrap);
+            ui->actionAutoWrap->setChecked(false);
+        }
+
+
+     ui->actionToolbar->setChecked(true);
+     ui->actionStatusBar->setChecked(true);
 
     statusLabel.setMaximumWidth(500);
     statusLabel.setText("length: " + QString::number(0) + "    lines: " + QString::number(1));
@@ -62,14 +76,14 @@ void MainWindow::on_actionAbout_triggered()
 
 void MainWindow::on_actionFind_triggered()
 {
-    FindDialog dio;
+    FindDialog dio(this,ui->textEdit);
     dio.exec();
 }
 
 
 void MainWindow::on_actionReplace_triggered()
 {
-    ReplaceDialog dio;
+    ReplaceDialog dio(this,ui->textEdit);
     dio.exec();
 }
 
@@ -339,5 +353,37 @@ void MainWindow::on_actionFontBackColor_triggered()
             cursor.setCharFormat(fmt);
             ui->textEdit->setTextCursor(cursor);
         }
+}
+
+
+void MainWindow::on_actionToolbar_triggered()
+{
+    bool visible = ui->toolBar->isVisible();
+    ui->toolBar->setVisible(!visible);
+    ui->actionToolbar->setChecked(!visible);
+}
+
+
+void MainWindow::on_actionStatusBar_triggered()
+{
+    bool visible = ui->statusbar->isVisible();
+    ui->statusbar->setVisible(!visible);
+    ui->actionStatusBar->setChecked(!visible);
+}
+
+
+void MainWindow::on_actionSelectAll_triggered()
+{
+    ui->textEdit->selectAll();
+}
+
+
+void MainWindow::on_actionExit_triggered()
+{
+    if(!maybeSave())
+        {
+            return;
+        }
+        this->close();
 }
 
