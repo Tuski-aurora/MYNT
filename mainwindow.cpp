@@ -47,16 +47,16 @@ MainWindow::MainWindow(QWidget *parent)
      ui->actionToolbar->setChecked(true);
      ui->actionStatusBar->setChecked(true);
 
-    statusLabel.setMaximumWidth(500);
+    statusLabel.setMaximumWidth(1000);
     statusLabel.setText("length: " + QString::number(0) + "    lines: " + QString::number(1));
     ui->statusbar->addPermanentWidget(&statusLabel);
 
-    statusCursorLabel.setMaximumWidth(150);
+    statusCursorLabel.setMaximumWidth(900);
     statusCursorLabel.setText("Ln: " + QString::number(0) + "    Col: " + QString::number(1));
     ui->statusbar->addPermanentWidget(&statusCursorLabel);
 
     QLabel *author = new QLabel(ui->statusbar);
-    author->setText(tr("hdm"));
+    author->setText(tr("黄德民"));
     ui->statusbar->addPermanentWidget(author);
 
 }
@@ -289,6 +289,8 @@ void MainWindow::on_textEdit_textChanged()
             isModified = true;
             setWindowTitleByPath();
         }
+    statusLabel.setText("length: " + QString::number(ui->textEdit->toPlainText().length()) +
+                            "  lines: " + QString::number(ui->textEdit->document()->lineCount()));
 }
 
 
@@ -385,5 +387,27 @@ void MainWindow::on_actionExit_triggered()
             return;
         }
         this->close();
+}
+
+
+void MainWindow::on_textEdit_cursorPositionChanged()
+{
+    int col = 0;
+        int ln = 0;
+        int flg = -1;
+        int pos = ui->textEdit->textCursor().position();
+        QString text = ui->textEdit->toPlainText();
+
+        for (int i = 0; i < pos; i++)
+        {
+            if (text[i] == '\n')
+            {
+                ln ++;
+                flg = i;
+            }
+        }
+        flg ++;
+        col = pos - flg;
+        statusCursorLabel.setText("Ln: " + QString::number(ln + 1) + "  Col: " + QString::number(col + 1));
 }
 
