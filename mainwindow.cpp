@@ -25,6 +25,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->actionRedo->setEnabled(false);
     ui->actionUndo->setEnabled(false);
     ui->actionPaste->setEnabled(false);
+    ui->actionToolbar->setChecked(true);
+    ui->actionStatusBar->setChecked(true);
+    ui->actionShowLine->setChecked(true);
 
     isModified = false;
     currentFilePath = "";
@@ -44,20 +47,21 @@ MainWindow::MainWindow(QWidget *parent)
         }
 
 
-     ui->actionToolbar->setChecked(true);
-     ui->actionStatusBar->setChecked(true);
-
     statusLabel.setMaximumWidth(1000);
     statusLabel.setText("length: " + QString::number(0) + "    lines: " + QString::number(1));
     ui->statusbar->addPermanentWidget(&statusLabel);
 
     statusCursorLabel.setMaximumWidth(900);
-    statusCursorLabel.setText("Ln: " + QString::number(0) + "    Col: " + QString::number(1));
+    statusCursorLabel.setText("  Ln: " + QString::number(0) + "    Col: " + QString::number(1));
     ui->statusbar->addPermanentWidget(&statusCursorLabel);
 
     QLabel *author = new QLabel(ui->statusbar);
-    author->setText(tr("黄德民"));
+    author->setText(tr("  黄德民"));
     ui->statusbar->addPermanentWidget(author);
+
+    connect(ui->actionShowLine, SIGNAL(triggered(bool)),
+            ui->textEdit, SLOT(showLineNumberArea(bool)));
+
 
 }
 
@@ -408,6 +412,12 @@ void MainWindow::on_textEdit_cursorPositionChanged()
         }
         flg ++;
         col = pos - flg;
-        statusCursorLabel.setText("Ln: " + QString::number(ln + 1) + "  Col: " + QString::number(col + 1));
+        statusCursorLabel.setText(" Ln: " + QString::number(ln + 1) + "  Col: " + QString::number(col + 1));
 }
+
+/*
+void MainWindow::on_actionShowLine_triggered(bool checked)
+{
+    ui->textEdit->hideLineNumberAera(checked);
+}*/
 

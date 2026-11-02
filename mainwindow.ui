@@ -43,7 +43,7 @@
      <number>1</number>
     </property>
     <item>
-     <widget class="QPlainTextEdit" name="textEdit">
+     <widget class="CodeEdit" name="textEdit">
       <property name="minimumSize">
        <size>
         <width>0</width>
@@ -365,6 +365,9 @@
    </property>
   </action>
   <action name="actionShowLine">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="res.qrc">
      <normaloff>:/image/showline.svg</normaloff>:/image/showline.svg</iconset>
@@ -404,6 +407,13 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CodeEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header location="global">codeedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="res.qrc"/>
  </resources>
