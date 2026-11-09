@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QLabel>
 
+class QCloseEvent;
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -71,6 +73,9 @@ private slots:
     void on_textEdit_cursorPositionChanged();
 
     //void on_actionShowLine_triggered(bool checked);
+
+protected:
+    void closeEvent(QCloseEvent *event) override;
 
 private:
     Ui::MainWindow *ui;

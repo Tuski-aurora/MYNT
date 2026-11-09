@@ -1,6 +1,7 @@
 #include "replacedialog.h"
 #include "ui_replacedialog.h"
 #include <QMessageBox>
+#include <QTextDocument>
 
 ReplaceDialog::ReplaceDialog(QWidget *parent, QPlainTextEdit* textEdit):
     QDialog(parent),
@@ -84,15 +85,20 @@ void ReplaceDialog::on_btreplace_clicked()
     QString to = ui->targetxt->text();
     Qt::CaseSensitivity cs = ui->cbCaseSensitive->isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive;
 
-        if (pTextEdit != nullptr && !target.isEmpty() && !to.isEmpty())
-        {
-            QString selText = pTextEdit->textCursor().selectedText();
-            if (selText.compare(target, cs) == 0)
-            {
-                pTextEdit->insertPlainText(to);
-            }
-            on_btfindnext_clicked();
-        }
+    if (pTextEdit == nullptr || target.isEmpty())
+    {
+        QMessageBox::warning(this, tr("替换提示"), tr("查找内容不能为空！"));
+        return;
+    }
+
+    // 当前选中内容与查找目标一致才替换；替换为空串即删除该处内容
+    QString selText = pTextEdit->textCursor().selectedText();
+    if (selText.compare(target, cs) == 0)
+    {
+        pTextEdit->insertPlainText(to);
+    }
+    // 替换后自动定位到下一处，形成连续的查找—替换过程
+    on_btfindnext_clicked();
 }
 
 
@@ -100,12 +106,40 @@ void ReplaceDialog::on_btallreplace_clicked()
 {
     QString target = ui->findtxt->text();
     QString to = ui->targetxt->text();
-    if (pTextEdit != nullptr && !target.isEmpty() && !to.isEmpty())
+
+    if (pTextEdit == nullptr || target.isEmpty())
     {
-        QString text = pTextEdit->toPlainText();
-        text.replace(target, to, ui->cbCaseSensitive->isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive);
-        pTextEdit->clear();
-        pTextEdit->insertPlainText(text);
+        QMessageBox::warning(this, tr("替换提示"), tr("查找内容不能为空！"));
+        return;
+    }
+
+    QTextDocument::FindFlags flags;
+    if (ui->cbCaseSensitive->isChecked())
+    {
+        flags |= QTextDocument::FindCaseSensitively;
+    }
+
+    int count = 0;
+    QTextCursor cursor = pTextEdit->textCursor();
+    cursor.movePosition(QTextCursor::Start);
+    QTextCursor found = pTextEdit->document()->find(target, cursor, flags);
+
+    cursor.beginEditBlock();          // 全部替换合并为一次撤销记录
+    while (!found.isNull())
+    {
+        found.insertText(to);         // 用文档游标替换，保留原有字符格式和撤销栈
+        ++count;
+        found = pTextEdit->document()->find(target, found, flags);
+    }
+    cursor.endEditBlock();
+
+    if (count == 0)
+    {
+        QMessageBox::information(this, tr("替换结果"), tr("未找到“%1”，未进行替换。").arg(target));
+    }
+    else
+    {
+        QMessageBox::information(this, tr("替换结果"), tr("共替换 %1 处。").arg(count));
     }
 }
 

@@ -43,7 +43,7 @@
      <number>1</number>
     </property>
     <item>
-     <widget class="CodeEdit" name="textEdit">
+     <widget class="CodeEditor" name="textEdit">
       <property name="minimumSize">
        <size>
         <width>0</width>
@@ -409,9 +409,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>CodeEdit</class>
+   <class>CodeEditor</class>
    <extends>QPlainTextEdit</extends>
-   <header location="global">codeedit.h</header>
+   <header location="global">codeeditor.h</header>
   </customwidget>
  </customwidgets>
  <resources>
